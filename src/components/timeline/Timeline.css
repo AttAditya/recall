@@ -1,0 +1,50 @@
+.timeline {
+    display: flex;
+    flex-direction: column;
+
+    width: max-content;
+    
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    gap: 0.5rem;
+
+    border-left: 0.1rem dashed #000000;
+    
+    padding: 0.25rem 0;
+    padding-left: 0.75rem;
+}
+
+.timeline > .timeline-item::before,
+.timeline > .timeline-add::before {
+    content: '';
+    position: absolute;
+    
+    width: 0.5rem;
+    height: 0.5rem;
+    
+    background-color: #000000;
+
+    border-radius: 50%;
+
+    left: -0.75rem;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+}
+
+.timeline.large {
+    gap: 1rem;
+
+    padding: 0.5rem 0;
+    padding-left: 1rem;
+}
+
+.timeline.large > .timeline-item::before,
+.timeline.large > .timeline-add::before {
+    width: 0.75rem;
+    height: 0.75rem;
+
+    left: -1rem;
+}
+

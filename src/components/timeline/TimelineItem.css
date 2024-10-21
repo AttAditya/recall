@@ -1,0 +1,32 @@
+.timeline-item {
+    display: flex;
+    
+    align-items: center;
+    justify-content: flex-start;
+
+    gap: 0.5rem;
+
+    background: #e3e3e3;
+
+    width: 100%;
+    position: relative;
+    
+    font-size: 0.75rem;
+
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+}
+
+.timeline.large .timeline-item {
+    font-size: 1rem;
+
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+}
+
+.timeline-item > span {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+

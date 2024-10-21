@@ -1,0 +1,55 @@
+.project {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.project-details {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: flex-start;
+
+    padding: 0rem 1rem;
+}
+
+.project-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.project-icon {
+    font-size: 2rem;
+}
+
+.project-title {
+    font-size: 3rem;
+}
+
+.lists-container {
+    flex-grow: 1;
+
+    display: flex;
+    gap: 1rem;
+
+    width: 100%;
+    padding: 0rem 1rem;
+
+    list-style: none;
+
+    overflow-x: auto;
+
+    border: 0.1rem solid #000000;
+}
+
+.task-list-container {
+    min-width: 20rem;
+    width: 20rem;
+    max-width: 20rem;
+}
+
