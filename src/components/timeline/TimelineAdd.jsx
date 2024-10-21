@@ -120,8 +120,8 @@ export function TimelineAdd({ updateData }) {
                 </div>
 
                 <div className="timeline-add-month timeline-add-field">
-                    <select className="timeline-add-month-select" ref={monthRef}>
-                        <option value="" selected={true}>Month</option>
+                    <select className="timeline-add-month-select" ref={monthRef} defaultValue="">
+                        <option value="">Month</option>
                         <option value="jan">January</option>
                         <option value="feb">February</option>
                         <option value="mar">March</option>

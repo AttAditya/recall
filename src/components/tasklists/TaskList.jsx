@@ -1,9 +1,36 @@
 import "./TaskList.css";
 
 import { TaskCard } from "./TaskCard";
+import { useAppMemory } from "../../hooks";
 
 export function TaskList({ listData }) {
-    function addTask() {}
+    let { getFromMemory } = useAppMemory();
+    
+    function addTask() {
+        let saveProjectData = getFromMemory("saveProjectData");
+        let getProjectData = getFromMemory("getProjectData");
+
+        let generateUUID = function() {
+            return Math.random().toString(36).substring(2) + Date.now().toString(36);
+        }
+
+        let projectData = getProjectData();
+        let taskId = generateUUID();
+        
+        projectData.lists[listData.id].tasks[taskId] = {
+            id: taskId,
+            title: "New Task",
+            content: "",
+            timeline: [],
+            listId: listData.id,
+            priority: {
+                dateAdded: Date.now(),
+                value: 0
+            }
+        };
+
+        saveProjectData({...projectData});
+    }
 
     return (
         <div className="task-list" id={listData.id}>
@@ -31,10 +58,13 @@ export function TaskList({ listData }) {
                 </li>
 
                 {
-                    listData.tasks.map((task) => {
+                    Object.values(listData.tasks).map((task) => {
                         return (
                             <li className="task-card-container" key={task.id}>
-                                <TaskCard cardData={task} />
+                                <TaskCard cardData={{
+                                    ...task,
+                                    listId: listData.id
+                                }} />
                             </li>
                         );
                     })

@@ -1,7 +1,24 @@
 import "./Project.css";
 import { TaskList } from "../../components/tasklists";
+import { useAppMemory } from "../../hooks";
+import { useState } from "react";
 
 export function Project({ projectData }) {
+    let {saveToMemory} = useAppMemory();
+    let [componentReloader, setComponentReloader] = useState(false);
+
+    function updateProjectData(data) {
+        projectData = {...data};
+        setComponentReloader(!componentReloader);
+    }
+
+    function getProjectData() {
+        return projectData;
+    }
+
+    saveToMemory("saveProjectData", updateProjectData);
+    saveToMemory("getProjectData", getProjectData);
+
     return (
         <div className="project">
             <div className="project-details">
@@ -22,7 +39,7 @@ export function Project({ projectData }) {
 
             <ul className="lists-container">
                 {
-                    projectData.lists.map((list) => {
+                    Object.values(projectData.lists).map((list) => {
                         return (
                             <li className="task-list-container" key={list.id}>
                                 <TaskList listData={list} />

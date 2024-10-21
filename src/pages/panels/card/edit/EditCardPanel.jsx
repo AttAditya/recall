@@ -1,25 +1,43 @@
 import "./EditCardPanel.css";
 
 import { Timeline } from '../../../../components';
+import { useAppMemory } from "../../../../hooks";
 
 export function EditCardPanel({ cardData }) {
-    let changes = {};
+    let { getFromMemory } = useAppMemory();
+    let changes = {...cardData};
+    
+    function saveCardChanges() {
+        let saveProjectData = getFromMemory("saveProjectData");
+        let getProjectData = getFromMemory("getProjectData");
+
+        let projectData = getProjectData();
+        projectData.lists[cardData.listId].tasks[cardData.id] = {
+            ...changes
+        };
+
+        saveProjectData({...projectData});
+    }
 
     function titleHeightChange(event) {
         event.target.style.height = "auto";
         event.target.style.height = `${event.target.scrollHeight}px`;
+        saveCardChanges();
     }
 
     function handleTitleChange(event) {
         changes.title = event.target.value;
+        saveCardChanges();
     }
 
     function handleContentChange(event) {
         changes.content = event.target.value;
+        saveCardChanges();
     }
 
     function handleTimelineChange(data) {
         changes.timeline = data;
+        saveCardChanges();
     }
 
     return (
@@ -42,20 +60,12 @@ export function EditCardPanel({ cardData }) {
                 </h4>
 
                 <div className="edit-card-panel-timeline">
-                    {
-                        cardData.timeline?.length ? (
-                            <Timeline
-                                size="large"
-                                timelineData={cardData.timeline}
-                                isEditable={true}
-                                updateData={handleTimelineChange}
-                            />
-                        ) : (
-                            <p className="edit-card-panel-data-empty">
-                                No timeline data available
-                            </p>
-                        )
-                    }
+                    <Timeline
+                        size="large"
+                        timelineData={cardData.timeline}
+                        isEditable={true}
+                        updateData={handleTimelineChange}
+                    />
                 </div>
             </div>
 
