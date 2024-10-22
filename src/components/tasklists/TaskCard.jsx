@@ -23,6 +23,19 @@ export function TaskCard({ cardData }) {
                 <EditCardPanel cardData={cardData} />
             )));
         });
+
+        addPopupAction((
+            <i className="fa-solid fa-trash"></i>
+        ), () => {
+            let saveProjectData = getFromMemory("saveProjectData");
+            let getProjectData = getFromMemory("getProjectData");
+
+            let projectData = getProjectData();
+            delete projectData.lists[cardData.listId].tasks[cardData.id];
+
+            saveProjectData({...projectData});
+            hidePopup();
+        });
     }
 
     return (
