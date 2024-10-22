@@ -9,19 +9,22 @@ export let projectTemplates = {
                 "id": "f789c2bc-35e3-41f8-b1b4-3fd41b495e35",
                 "iconClass": "fa-solid fa-clipboard-list",
                 "title": "To Do",
-                "tasks": {}
+                "tasks": {},
+                "order": 0
             },
             "d7b20944-f7f7-4cb0-9757-272d947e3b7e": {
                 "id": "d7b20944-f7f7-4cb0-9757-272d947e3b7e",
                 "iconClass": "fa-solid fa-bars-progress",
                 "title": "In Progress",
-                "tasks": {}
+                "tasks": {},
+                "order": 1
             },
             "4e257193-04bc-4ad7-9df6-25c5d154cb48": {
                 "id": "4e257193-04bc-4ad7-9df6-25c5d154cb48",
                 "iconClass": "fa-solid fa-circle-check",
                 "title": "Completed",
-                "tasks": {}
+                "tasks": {},
+                "order": 2
             }
         }
     }

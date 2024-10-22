@@ -32,16 +32,45 @@ export function TaskList({ listData }) {
         saveProjectData({...projectData});
     }
 
+    function deleteList() {
+        let saveProjectData = getFromMemory("saveProjectData");
+        let getProjectData = getFromMemory("getProjectData");
+
+        let projectData = getProjectData();
+        delete projectData.lists[listData.id];
+
+        saveProjectData({...projectData});
+    }
+
+    function updateListTitle(event) {
+        let saveProjectData = getFromMemory("saveProjectData");
+        let getProjectData = getFromMemory("getProjectData");
+
+        let projectData = getProjectData();
+        projectData.lists[listData.id].title = event.target.value;
+
+        saveProjectData({...projectData});
+    }
+
     return (
         <div className="task-list" id={listData.id}>
-            <div className="task-list-details">
-                <span className="task-list-icon">
-                    <i className={`${listData.iconClass}`}></i>
-                </span>
+            <div className="task-list-header">
+                <div className="task-list-details">
+                    <span className="task-list-icon">
+                        <i className={`${listData.iconClass}`}></i>
+                    </span>
 
-                <h2 className="task-list-title">
-                    {listData.title}
-                </h2>
+                    {/* <h2 className="task-list-title">
+                        {listData.title}
+                    </h2> */}
+                    <input type="text" className="task-list-title" defaultValue={listData.title} onBlur={updateListTitle} />
+                </div>
+
+                <div className="task-list-actions">
+                    <button className="task-list-action" onClick={deleteList}>
+                        <i className="fa-solid fa-trash"></i>
+                    </button>
+                </div>
             </div>
 
             <ul className="task-card-list">

@@ -21,6 +21,28 @@ export function Project({ projectData }) {
         return projectData;
     }
 
+    function newTaskList() {
+        let saveProjectData = getFromMemory("saveProjectData");
+        let getProjectData = getFromMemory("getProjectData");
+
+        let generateUUID = function() {
+            return Math.random().toString(36).substring(2) + Date.now().toString(36);
+        }
+
+        let projectData = getProjectData();
+        let listId = generateUUID();
+
+        projectData.lists[listId] = {
+            id: listId,
+            iconClass: "fa-solid fa-clipboard-list",
+            title: "New List",
+            tasks: {},
+            order: Object.keys(projectData.lists).length
+        };
+
+        saveProjectData({...projectData});
+    }
+
     saveToMemory("saveProjectData", updateProjectData);
     saveToMemory("getProjectData", getProjectData);
 
@@ -47,23 +69,28 @@ export function Project({ projectData }) {
                     Object.values(projectData.lists).map((list) => {
                         return (
                             <li className="task-list-container" key={list.id}>
-                                <TaskList listData={list} />
+                                <TaskList listData={{
+                                    ...list,
+                                    projectId: projectData.id
+                                }} />
                             </li>
                         );
                     })
                 }
 
-                {/* <li className="add-task-list">
-                    <button className="add-task-list-button">
-                        <span className="add-task-list-icon">
-                            <i className="fa-solid fa-plus"></i>
-                        </span>
+                <li className="task-list-container">
+                    <div className="lists-actions">
+                        <button className="lists-action" onClick={newTaskList}>
+                            <span className="lists-action-icon">
+                                <i className="fa-solid fa-star-of-life"></i>
+                            </span>
 
-                        <span className="add-task-list-text">
-                            Add Task List
-                        </span>
-                    </button>
-                </li> */}
+                            <span className="lists-action-text">
+                                New List
+                            </span>
+                        </button>
+                    </div>
+                </li>
             </ul>
         </div>
     );
