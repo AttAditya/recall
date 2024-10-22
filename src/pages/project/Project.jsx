@@ -47,6 +47,18 @@ export function Project({ projectData }) {
                         );
                     })
                 }
+
+                {/* <li className="add-task-list">
+                    <button className="add-task-list-button">
+                        <span className="add-task-list-icon">
+                            <i className="fa-solid fa-plus"></i>
+                        </span>
+
+                        <span className="add-task-list-text">
+                            Add Task List
+                        </span>
+                    </button>
+                </li> */}
             </ul>
         </div>
     );
