@@ -4,11 +4,15 @@ import { useAppMemory } from "../../hooks";
 import { useState } from "react";
 
 export function Project({ projectData }) {
-    let {saveToMemory} = useAppMemory();
+    let { getFromMemory, saveToMemory } = useAppMemory();
     let [componentReloader, setComponentReloader] = useState(false);
 
     function updateProjectData(data) {
+        let saveLocally = getFromMemory("saveLocally");
+        
         projectData = {...data};
+        saveLocally(projectData);
+
         setComponentReloader(!componentReloader);
     }
 

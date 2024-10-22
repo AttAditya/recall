@@ -2,14 +2,27 @@ import './variables.css';
 import './App.css';
 
 import { Project } from './pages';
-import { projectData } from './data';
+import { projectTemplates } from './data';
 
 import { Popup } from './components';
 import { useAppMemory } from './hooks';
 import { useEffect } from 'react';
 
 function App() {
-    let { getFromMemory } = useAppMemory();
+    let { getFromMemory, saveToMemory } = useAppMemory();
+    let projectData = projectTemplates["TODO"];
+
+    if (!localStorage.getItem("temp-memory")) {
+        localStorage.setItem("temp-memory", JSON.stringify(projectData));
+    }
+
+    projectData = JSON.parse(localStorage.getItem("temp-memory"));
+
+    function saveLocally(data) {
+        localStorage.setItem("temp-memory", JSON.stringify(data));
+    }
+
+    saveToMemory("saveLocally", saveLocally);
 
     useEffect(() => {
         let escapeListener = document.addEventListener('keydown', (event) => {
